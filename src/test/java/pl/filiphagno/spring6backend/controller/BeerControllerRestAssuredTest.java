@@ -20,9 +20,7 @@ import org.springframework.test.context.ActiveProfiles;
 import static com.atlassian.oai.validator.whitelist.rule.WhitelistRules.messageHasKey;
 import static io.restassured.RestAssured.given;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(BeerControllerRestAssuredTest.TestConfig.class)

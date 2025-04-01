@@ -11,9 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Getter
 @Setter
 @Builder

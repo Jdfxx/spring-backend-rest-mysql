@@ -14,9 +14,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("localmysql")

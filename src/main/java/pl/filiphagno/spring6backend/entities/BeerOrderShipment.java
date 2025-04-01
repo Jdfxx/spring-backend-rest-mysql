@@ -8,9 +8,7 @@ import org.hibernate.type.SqlTypes;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Getter
 @Setter
 @NoArgsConstructor

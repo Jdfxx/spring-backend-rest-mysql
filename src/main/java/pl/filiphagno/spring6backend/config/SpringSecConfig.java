@@ -11,9 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Configuration
 @Profile("mylocalsql")
 public class SpringSecConfig {

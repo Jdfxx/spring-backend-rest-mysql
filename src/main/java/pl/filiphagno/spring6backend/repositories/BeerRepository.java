@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 public interface BeerRepository extends JpaRepository<Beer, UUID> {
 
     Page<Beer> findAllByBeerNameIsLikeIgnoreCase(String beerName, Pageable pageable);

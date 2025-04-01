@@ -1,8 +1,12 @@
 package pl.filiphagno.spring6backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.val;
 import pl.filiphagno.spring6backend.entities.Beer;
 import pl.filiphagno.spring6backend.events.BeerCreatedEvent;
+import pl.filiphagno.spring6backend.events.BeerDeletedEvent;
+import pl.filiphagno.spring6backend.events.BeerPatchEvent;
+import pl.filiphagno.spring6backend.events.BeerUpdatedEvent;
 import pl.filiphagno.spring6backend.mappers.BeerMapper;
 import pl.filiphagno.spring6backend.model.BeerDTO;
 import pl.filiphagno.spring6backend.model.BeerStyle;
@@ -73,7 +77,7 @@ class BeerControllerIT {
 
     @Test
     void testCreateBeerMVC() throws Exception {
-        var beerDTO = BeerDTO.builder()
+        val beerDTO = BeerDTO.builder()
                 .beerName("New Beer")
                 .beerStyle(BeerStyle.IPA)
                 .upc("123123")
@@ -89,8 +93,66 @@ class BeerControllerIT {
                 .andExpect(status().isCreated())
                 .andReturn();
 
-        Assertions.assertEquals(1, applicationEvents.stream(BeerCreatedEvent.class).count());
+        Assertions.assertEquals(1, applicationEvents
+                .stream(BeerCreatedEvent.class)
+                .count());
+    }
 
+    @Test
+    void testUpdateBeer() throws Exception {
+        Beer beer = beerRepository.findAll().get(0);
+
+        BeerDTO beerDTO = beerMapper.beerToBeerDto(beer);
+
+        beerDTO.setBeerName("Updated Name");
+
+        mockMvc.perform(put(BeerController.BEER_PATH_ID, beer.getId())
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(beerDTO)))
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        Assertions.assertEquals(1, applicationEvents
+                .stream(BeerUpdatedEvent.class)
+                .count());
+    }
+
+    @Test
+    void testPatchBeerMvc() throws Exception {
+        Beer beer = beerRepository.findAll().get(0);
+
+        Map<String, Object> beerMap = new HashMap<>();
+        beerMap.put("beerName", "New Name");
+
+        mockMvc.perform(patch(BeerController.BEER_PATH_ID, beer.getId())
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(beerMap)))
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        Assertions.assertEquals(1, applicationEvents
+                .stream(BeerPatchEvent.class)
+                .count());
+    }
+
+    @Test
+    void deleteByIdFoundMVC() throws Exception {
+        Beer beer = beerRepository.findAll().getFirst();
+
+        mockMvc.perform(delete(BeerController.BEER_PATH_ID, beer.getId())
+                        .with(BeerControllerTest.jwtRequestPostProcessor)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent())
+                .andReturn();
+
+        Assertions.assertEquals(1, applicationEvents
+                .stream(BeerDeletedEvent.class)
+                .count());
     }
 
     @Disabled // just for demo purposes

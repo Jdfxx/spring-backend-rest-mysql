@@ -12,9 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Slf4j
 @Service
 public class BeerServiceImpl implements BeerService {

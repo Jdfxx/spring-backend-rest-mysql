@@ -1,11 +1,5 @@
 package pl.filiphagno.spring6backend.services;
 
-import pl.filiphagno.spring6backend.entities.Beer;
-import pl.filiphagno.spring6backend.events.BeerCreatedEvent;
-import pl.filiphagno.spring6backend.mappers.BeerMapper;
-import pl.filiphagno.spring6backend.model.BeerDTO;
-import pl.filiphagno.spring6backend.model.BeerStyle;
-import pl.filiphagno.spring6backend.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
@@ -20,6 +14,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import pl.filiphagno.spring6backend.entities.Beer;
+import pl.filiphagno.spring6backend.events.BeerCreatedEvent;
+import pl.filiphagno.spring6backend.events.BeerDeletedEvent;
+import pl.filiphagno.spring6backend.events.BeerPatchEvent;
+import pl.filiphagno.spring6backend.events.BeerUpdatedEvent;
+import pl.filiphagno.spring6backend.mappers.BeerMapper;
+import pl.filiphagno.spring6backend.model.BeerDTO;
+import pl.filiphagno.spring6backend.model.BeerStyle;
+import pl.filiphagno.spring6backend.repositories.BeerRepository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -140,6 +143,12 @@ public class BeerServiceJPA implements BeerService {
             foundBeer.setUpc(beer.getUpc());
             foundBeer.setPrice(beer.getPrice());
             foundBeer.setQuantityOnHand(beer.getQuantityOnHand());
+            var savedBeer = beerRepository.save(foundBeer);
+
+            var auth = SecurityContextHolder.getContext().getAuthentication();
+
+            eventPublisher.publishEvent(new BeerUpdatedEvent(savedBeer, auth));
+
             atomicReference.set(Optional.of(beerMapper
                     .beerToBeerDto(beerRepository.save(foundBeer))));
         }, () -> {
@@ -156,6 +165,7 @@ public class BeerServiceJPA implements BeerService {
 
         if (beerRepository.existsById(beerId)) {
             beerRepository.deleteById(beerId);
+            eventPublisher.publishEvent(BeerDeletedEvent.builder().beerId(beerId).build());
             return true;
         }
         return false;
@@ -193,8 +203,15 @@ public class BeerServiceJPA implements BeerService {
             if (beer.getQuantityOnHand() != null){
                 foundBeer.setQuantityOnHand(beer.getQuantityOnHand());
             }
+
+            var savedBeer = beerRepository.save(foundBeer);
+
+            var auth = SecurityContextHolder.getContext().getAuthentication();
+
+            eventPublisher.publishEvent(new BeerPatchEvent(savedBeer, auth));
+
             atomicReference.set(Optional.of(beerMapper
-                    .beerToBeerDto(beerRepository.save(foundBeer))));
+                    .beerToBeerDto(savedBeer)));
         }, () -> {
             atomicReference.set(Optional.empty());
         });

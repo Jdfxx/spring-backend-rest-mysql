@@ -6,9 +6,7 @@ import pl.filiphagno.spring6backend.model.BeerDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-/**
- * Created by jt, Spring Framework Guru.
- */
+
 @Mapper
 public interface BeerMapper {
 

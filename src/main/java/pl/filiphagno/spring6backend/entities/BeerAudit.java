@@ -25,10 +25,12 @@ public class BeerAudit {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator(style = UuidGenerator.Style.TIME)
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID auditId;
 
     @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
 
     @Version
