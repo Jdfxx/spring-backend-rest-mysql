@@ -3,10 +3,10 @@ package pl.filiphagno.spring6backend.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import pl.filiphagno.spring6backend.model.BeerOrderCreateDTO;
 import pl.filiphagno.spring6backend.model.BeerOrderDTO;
 import pl.filiphagno.spring6backend.services.BeerOrderService;
 
@@ -34,4 +34,13 @@ public class BeerOrderController {
         return beerOrderService.getBeerOrderById(beerOrderId).orElseThrow(NotFoundException::new);
     }
 
+    @PostMapping(BEER_ORDER)
+    public ResponseEntity<String> createBeerOrder(@RequestBody BeerOrderCreateDTO beerOrderCreateDTO) {
+        var savedBeerOrder = beerOrderService.createBeerOrder(beerOrderCreateDTO);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", BEER_ORDER + "/" + savedBeerOrder.getId().toString());
+
+        return ResponseEntity.created(headers.getLocation()).headers(headers).body("Beer Order Created Successfully");
+    }
 }

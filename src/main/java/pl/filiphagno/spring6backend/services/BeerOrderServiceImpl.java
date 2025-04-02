@@ -5,11 +5,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.filiphagno.spring6backend.entities.BeerOrder;
+import pl.filiphagno.spring6backend.entities.BeerOrderLine;
+import pl.filiphagno.spring6backend.entities.Customer;
 import pl.filiphagno.spring6backend.mappers.BeerOrderMapper;
+import pl.filiphagno.spring6backend.model.BeerOrderCreateDTO;
 import pl.filiphagno.spring6backend.model.BeerOrderDTO;
 import pl.filiphagno.spring6backend.repositories.BeerOrderRepository;
+import pl.filiphagno.spring6backend.repositories.BeerRepository;
+import pl.filiphagno.spring6backend.repositories.CustomerRepository;
+import pl.filiphagno.spring6backend.controller.NotFoundException;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -20,6 +28,8 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     final private BeerOrderRepository beerOrderRepository;
 
     final private BeerOrderMapper beerOrderMapper;
+    private final BeerRepository beerRepository;
+    private final CustomerRepository customerRepository;
 
     @Override
     public Page<BeerOrderDTO> getBeerOrders(Integer pageNumber, Integer pageSize) {
@@ -42,5 +52,27 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     @Override
     public Optional<BeerOrderDTO> getBeerOrderById(UUID beerOrderId) {
         return Optional.ofNullable(beerOrderMapper.beerOrderToBeerOrderDTO(beerOrderRepository.findById(beerOrderId).orElse(null)));
+    }
+
+    @Override
+    public BeerOrder createBeerOrder(BeerOrderCreateDTO beerOrderCreateDTO) {
+
+        Customer customer = customerRepository.findById(beerOrderCreateDTO.getCustomerId())
+                .orElseThrow(NotFoundException::new);
+
+        Set<BeerOrderLine> beerOrderLines = new HashSet<>();
+
+        beerOrderCreateDTO.getBeerOrderLines().forEach(beerOrderLine -> {
+            beerOrderLines.add(BeerOrderLine.builder()
+                    .beer(beerRepository.findById(beerOrderLine.getBeerId()).orElseThrow(NotFoundException::new))
+                    .orderQuantity(beerOrderLine.getOrderQuantity())
+                    .build());
+        });
+
+        return beerOrderRepository.save(BeerOrder.builder()
+                .customer(customer)
+                .beerOrderLines(beerOrderLines)
+                .customerRef(beerOrderCreateDTO.getCustomerRef())
+                .build());
     }
 }
