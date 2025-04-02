@@ -17,6 +17,8 @@
 package pl.filiphagno.spring6backend.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -71,8 +73,12 @@ public class BeerOrder {
         return this.id == null;
     }
 
+    @NotNull
+    @NotBlank
     private String customerRef;
 
+    @NotNull
+    @NotBlank
     @ManyToOne
     private Customer customer;
 

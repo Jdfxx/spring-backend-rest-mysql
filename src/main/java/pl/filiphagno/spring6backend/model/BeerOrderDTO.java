@@ -1,12 +1,9 @@
 package pl.filiphagno.spring6backend.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
-import pl.filiphagno.spring6backend.entities.BeerOrderLine;
-import pl.filiphagno.spring6backend.entities.BeerOrderShipment;
 import pl.filiphagno.spring6backend.entities.Customer;
 
 import java.sql.Timestamp;
@@ -25,15 +22,13 @@ public class BeerOrderDTO {
 
     private Timestamp lastModifiedDate;
 
-    public boolean isNew() {
-        return this.id == null;
-    }
-
     private String customerRef;
 
-    private Customer customer;
+    @NotNull
+    @NotBlank
+    private CustomerDTO customerDTO;
 
-    private Set<BeerOrderLine> beerOrderLines;
+    private Set<BeerOrderLineDTO> beerOrderLines;
 
-    private BeerOrderShipment beerOrderShipment;
+    private BeerOrderShipmentDTO beerOrderShipment;
 }
