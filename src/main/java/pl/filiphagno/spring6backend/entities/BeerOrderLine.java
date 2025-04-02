@@ -17,6 +17,7 @@
 package pl.filiphagno.spring6backend.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import org.hibernate.annotations.*;
 import org.hibernate.type.SqlTypes;
@@ -62,6 +63,9 @@ public class BeerOrderLine {
     @ManyToOne
     private Beer beer;
 
-    private Integer orderQuantity = 0;
+    @Min(value = 1, message = "Quantity must be greater than 0")
+    @Builder.Default
+    private Integer orderQuantity = 1;
+    @Builder.Default
     private Integer quantityAllocated = 0;
 }

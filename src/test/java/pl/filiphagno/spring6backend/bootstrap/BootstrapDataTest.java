@@ -1,5 +1,6 @@
 package pl.filiphagno.spring6backend.bootstrap;
 
+import pl.filiphagno.spring6backend.repositories.BeerOrderRepository;
 import pl.filiphagno.spring6backend.repositories.BeerRepository;
 import pl.filiphagno.spring6backend.repositories.CustomerRepository;
 import pl.filiphagno.spring6backend.services.BeerCsvService;
@@ -27,9 +28,13 @@ class BootstrapDataTest {
 
     BootstrapData bootstrapData;
 
+    @Autowired
+    BeerOrderRepository beerOrderRepository;
+
     @BeforeEach
     void setUp() {
-        bootstrapData = new BootstrapData(beerRepository, customerRepository, csvService);
+        bootstrapData = new BootstrapData(beerRepository, customerRepository,
+                csvService, beerOrderRepository);
     }
 
     @Test
@@ -38,6 +43,7 @@ class BootstrapDataTest {
 
         assertThat(beerRepository.count()).isEqualTo(2413);
         assertThat(customerRepository.count()).isEqualTo(3);
+        assertThat(beerOrderRepository.count()).isGreaterThan(0);
     }
 }
 

@@ -1,7 +1,5 @@
 package pl.filiphagno.spring6backend.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,9 +21,7 @@ public class BeerOrderDTO {
 
     private String customerRef;
 
-    @NotNull
-    @NotBlank
-    private CustomerDTO customerDTO;
+    private CustomerDTO customer;
 
     private Set<BeerOrderLineDTO> beerOrderLines;
 

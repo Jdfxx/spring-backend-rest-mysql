@@ -1,5 +1,6 @@
 package pl.filiphagno.spring6backend.model;
 
+import jakarta.validation.constraints.Min;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class BeerOrderLineDTO {
 
     private BeerDTO beer;
 
+    @Min(value = 1, message = "Quantity must be greater than 0")
     private Integer orderQuantity;
     private Integer quantityAllocated;
 
