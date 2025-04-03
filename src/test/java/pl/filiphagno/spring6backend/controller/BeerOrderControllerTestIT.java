@@ -81,6 +81,11 @@ public class BeerOrderControllerTestIT {
 
         assertThat(beerOrderRepository.findById(beerOrder.getId()).isEmpty());
 
+        mockMvc.perform(delete(BeerOrderController.BEER_ORDER_ID, beerOrder.getId())
+                        .contentType("application/json")
+                        .with(jwtRequestPostProcessor))
+                .andExpect(status().isNotFound());
+
     }
 
 
