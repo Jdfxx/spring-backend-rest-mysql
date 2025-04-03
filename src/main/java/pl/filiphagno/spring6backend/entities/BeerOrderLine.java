@@ -63,9 +63,7 @@ public class BeerOrderLine {
     @ManyToOne
     private Beer beer;
 
-    @Min(value = 1, message = "Quantity must be greater than 0")
-    @Builder.Default
+    @Min(value = 1, message = "Quantity On Hand must be greater than 0")
     private Integer orderQuantity = 1;
-    @Builder.Default
     private Integer quantityAllocated = 0;
 }

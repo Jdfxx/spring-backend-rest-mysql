@@ -83,9 +83,6 @@ public class BootstrapData implements CommandLineRunner {
             var orders = beerOrderRepository.findAll();
             System.out.println(orders.size());
         }
-
-
-
     }
 
 

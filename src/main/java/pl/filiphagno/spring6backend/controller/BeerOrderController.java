@@ -4,12 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.filiphagno.spring6backend.model.BeerOrderCreateDTO;
 import pl.filiphagno.spring6backend.model.BeerOrderDTO;
+import pl.filiphagno.spring6backend.model.BeerOrderUpdateDTO;
 import pl.filiphagno.spring6backend.services.BeerOrderService;
 
+import java.net.URI;
 import java.util.UUID;
 
 @Slf4j
@@ -38,9 +41,23 @@ public class BeerOrderController {
     public ResponseEntity<String> createBeerOrder(@RequestBody BeerOrderCreateDTO beerOrderCreateDTO) {
         var savedBeerOrder = beerOrderService.createBeerOrder(beerOrderCreateDTO);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", BEER_ORDER + "/" + savedBeerOrder.getId().toString());
-
-        return ResponseEntity.created(headers.getLocation()).headers(headers).body("Beer Order Created Successfully");
+        return ResponseEntity.created(URI.create(BEER_ORDER + "/" + savedBeerOrder.getId().toString()))
+                .body("Beer Order Created Successfully");
     }
+
+    @PutMapping(BEER_ORDER_ID)
+    public ResponseEntity<BeerOrderDTO>  updateBeerOrderById(@PathVariable("beerOrderId") UUID beerOrderId,
+                                            @RequestBody BeerOrderUpdateDTO beerOrderUpdateDTO) {
+        return ResponseEntity.ok(beerOrderService.updateBeerOrderById(beerOrderId, beerOrderUpdateDTO));
+    }
+
+    @DeleteMapping(BEER_ORDER_ID)
+    public ResponseEntity<String> deleteBeerOrderById(@PathVariable("beerOrderId") UUID beerOrderId) {
+        if(! beerOrderService.deleteBeerOrderById(beerOrderId)){
+            throw new NotFoundException();
+        }
+
+        return new ResponseEntity<>("Beer Order Deleted Successfully", HttpStatus.NO_CONTENT);
+    }
+
 }
