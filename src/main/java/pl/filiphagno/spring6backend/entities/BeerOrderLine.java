@@ -21,6 +21,7 @@ import jakarta.validation.constraints.Min;
 import lombok.*;
 import org.hibernate.annotations.*;
 import org.hibernate.type.SqlTypes;
+import pl.filiphagno.spring6backend.model.BeerOrderLineStatus;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -66,4 +67,8 @@ public class BeerOrderLine {
     @Min(value = 1, message = "Quantity On Hand must be greater than 0")
     private Integer orderQuantity = 1;
     private Integer quantityAllocated = 0;
+
+    @Column(columnDefinition = "smallint")
+    private BeerOrderLineStatus beerOrderLineStatus;
+
 }
