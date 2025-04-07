@@ -3,6 +3,7 @@ package pl.filiphagno.spring6backend.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Set;
 import java.util.UUID;
@@ -20,6 +21,8 @@ public class BeerOrderDTO {
     private Timestamp lastModifiedDate;
 
     private String customerRef;
+
+    BigDecimal paymentAmount;
 
     private CustomerDTO customer;
 
