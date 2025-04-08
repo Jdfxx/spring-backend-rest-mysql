@@ -1,6 +1,8 @@
 package pl.filiphagno.spring6backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import lombok.val;
 import pl.filiphagno.spring6backend.entities.Beer;
 import pl.filiphagno.spring6backend.events.BeerCreatedEvent;
@@ -8,8 +10,6 @@ import pl.filiphagno.spring6backend.events.BeerDeletedEvent;
 import pl.filiphagno.spring6backend.events.BeerPatchEvent;
 import pl.filiphagno.spring6backend.events.BeerUpdatedEvent;
 import pl.filiphagno.spring6backend.mappers.BeerMapper;
-import pl.filiphagno.spring6backend.model.BeerDTO;
-import pl.filiphagno.spring6backend.model.BeerStyle;
 import pl.filiphagno.spring6backend.repositories.BeerRepository;
 import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Assertions;

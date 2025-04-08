@@ -1,7 +1,7 @@
 package pl.filiphagno.spring6backend.mappers;
 
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import pl.filiphagno.spring6backend.entities.Customer;
-import pl.filiphagno.spring6backend.model.CustomerDTO;
 import org.mapstruct.Mapper;
 
 

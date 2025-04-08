@@ -1,8 +1,8 @@
 package pl.filiphagno.spring6backend.repositories;
 
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import pl.filiphagno.spring6backend.bootstrap.BootstrapData;
 import pl.filiphagno.spring6backend.entities.Beer;
-import pl.filiphagno.spring6backend.model.BeerStyle;
 import pl.filiphagno.spring6backend.services.BeerCsvServiceImpl;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;

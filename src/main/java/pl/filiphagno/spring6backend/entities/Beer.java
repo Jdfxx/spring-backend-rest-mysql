@@ -1,6 +1,6 @@
 package pl.filiphagno.spring6backend.entities;
 
-import pl.filiphagno.spring6backend.model.BeerStyle;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

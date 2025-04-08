@@ -1,6 +1,6 @@
 package pl.filiphagno.spring6backend.controller;
 
-import pl.filiphagno.spring6backend.model.CustomerDTO;
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import pl.filiphagno.spring6backend.services.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;

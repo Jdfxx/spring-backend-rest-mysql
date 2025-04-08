@@ -1,8 +1,8 @@
 package pl.filiphagno.spring6backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
 import pl.filiphagno.spring6backend.config.SpringSecConfig;
-import pl.filiphagno.spring6backend.model.BeerDTO;
 import pl.filiphagno.spring6backend.services.BeerService;
 import pl.filiphagno.spring6backend.services.BeerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

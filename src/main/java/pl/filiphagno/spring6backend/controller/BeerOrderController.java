@@ -1,14 +1,14 @@
 package pl.filiphagno.spring6backend.controller;
 
+import guru.springframework.spring6restmvcapi.model.BeerOrderCreateDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.filiphagno.spring6backend.model.BeerOrderCreateDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderUpdateDTO;
 import pl.filiphagno.spring6backend.services.BeerOrderService;
 
 import java.net.URI;

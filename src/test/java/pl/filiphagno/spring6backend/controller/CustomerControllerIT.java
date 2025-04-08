@@ -1,8 +1,8 @@
 package pl.filiphagno.spring6backend.controller;
 
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import pl.filiphagno.spring6backend.entities.Customer;
 import pl.filiphagno.spring6backend.mappers.CustomerMapper;
-import pl.filiphagno.spring6backend.model.CustomerDTO;
 import pl.filiphagno.spring6backend.repositories.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

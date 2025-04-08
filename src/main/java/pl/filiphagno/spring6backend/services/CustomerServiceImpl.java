@@ -1,6 +1,6 @@
 package pl.filiphagno.spring6backend.services;
 
-import pl.filiphagno.spring6backend.model.CustomerDTO;
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 

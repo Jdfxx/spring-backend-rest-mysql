@@ -1,5 +1,8 @@
 package pl.filiphagno.spring6backend.services;
 
+import guru.springframework.spring6restmvcapi.model.BeerOrderCreateDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.data.domain.Page;
@@ -10,10 +13,6 @@ import pl.filiphagno.spring6backend.entities.BeerOrderLine;
 import pl.filiphagno.spring6backend.entities.BeerOrderShipment;
 import pl.filiphagno.spring6backend.entities.Customer;
 import pl.filiphagno.spring6backend.mappers.BeerOrderMapper;
-import pl.filiphagno.spring6backend.model.BeerDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderCreateDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderUpdateDTO;
 import pl.filiphagno.spring6backend.repositories.BeerOrderRepository;
 import pl.filiphagno.spring6backend.repositories.BeerRepository;
 import pl.filiphagno.spring6backend.repositories.CustomerRepository;

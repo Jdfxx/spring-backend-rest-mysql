@@ -1,7 +1,7 @@
 package pl.filiphagno.spring6backend.repositories;
 
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import pl.filiphagno.spring6backend.entities.Beer;
-import pl.filiphagno.spring6backend.model.BeerStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

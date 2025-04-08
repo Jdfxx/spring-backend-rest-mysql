@@ -1,10 +1,10 @@
 package pl.filiphagno.spring6backend.services;
 
+import guru.springframework.spring6restmvcapi.model.BeerOrderCreateDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderUpdateDTO;
 import org.springframework.data.domain.Page;
 import pl.filiphagno.spring6backend.entities.BeerOrder;
-import pl.filiphagno.spring6backend.model.BeerOrderCreateDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderUpdateDTO;
 
 import java.util.Optional;
 import java.util.UUID;

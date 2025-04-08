@@ -1,13 +1,13 @@
 package pl.filiphagno.spring6backend.mappers;
 
+import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderLineDTO;
+import guru.springframework.spring6restmvcapi.model.BeerOrderShipmentDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import pl.filiphagno.spring6backend.entities.BeerOrder;
 import pl.filiphagno.spring6backend.entities.BeerOrderLine;
 import pl.filiphagno.spring6backend.entities.BeerOrderShipment;
-import pl.filiphagno.spring6backend.model.BeerOrderDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderLineDTO;
-import pl.filiphagno.spring6backend.model.BeerOrderShipmentDTO;
 
 @Mapper
 public interface BeerOrderMapper {

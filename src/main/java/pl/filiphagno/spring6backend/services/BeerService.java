@@ -1,7 +1,7 @@
 package pl.filiphagno.spring6backend.services;
 
-import pl.filiphagno.spring6backend.model.BeerDTO;
-import pl.filiphagno.spring6backend.model.BeerStyle;
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;

@@ -1,5 +1,7 @@
 package pl.filiphagno.spring6backend.services;
 
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
@@ -20,8 +22,6 @@ import pl.filiphagno.spring6backend.events.BeerDeletedEvent;
 import pl.filiphagno.spring6backend.events.BeerPatchEvent;
 import pl.filiphagno.spring6backend.events.BeerUpdatedEvent;
 import pl.filiphagno.spring6backend.mappers.BeerMapper;
-import pl.filiphagno.spring6backend.model.BeerDTO;
-import pl.filiphagno.spring6backend.model.BeerStyle;
 import pl.filiphagno.spring6backend.repositories.BeerRepository;
 
 import java.util.Optional;

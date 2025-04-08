@@ -1,7 +1,7 @@
 package pl.filiphagno.spring6backend.services;
 
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import pl.filiphagno.spring6backend.mappers.CustomerMapper;
-import pl.filiphagno.spring6backend.model.CustomerDTO;
 import pl.filiphagno.spring6backend.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

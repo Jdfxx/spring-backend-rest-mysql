@@ -1,8 +1,8 @@
 package pl.filiphagno.spring6backend.mappers;
 
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
 import pl.filiphagno.spring6backend.entities.Beer;
 import pl.filiphagno.spring6backend.entities.BeerAudit;
-import pl.filiphagno.spring6backend.model.BeerDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

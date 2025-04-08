@@ -1,12 +1,11 @@
 package pl.filiphagno.spring6backend.bootstrap;
 
-import lombok.val;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import pl.filiphagno.spring6backend.entities.Beer;
 import pl.filiphagno.spring6backend.entities.BeerOrder;
 import pl.filiphagno.spring6backend.entities.BeerOrderLine;
 import pl.filiphagno.spring6backend.entities.Customer;
 import pl.filiphagno.spring6backend.model.BeerCSVRecord;
-import pl.filiphagno.spring6backend.model.BeerStyle;
 import pl.filiphagno.spring6backend.repositories.BeerOrderRepository;
 import pl.filiphagno.spring6backend.repositories.BeerRepository;
 import pl.filiphagno.spring6backend.repositories.CustomerRepository;
