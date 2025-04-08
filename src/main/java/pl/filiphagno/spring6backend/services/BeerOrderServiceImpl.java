@@ -1,10 +1,12 @@
 package pl.filiphagno.spring6backend.services;
 
+import guru.springframework.spring6restmvcapi.events.OrderPlacedEvent;
 import guru.springframework.spring6restmvcapi.model.BeerOrderCreateDTO;
 import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
 import guru.springframework.spring6restmvcapi.model.BeerOrderUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,8 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     final private BeerOrderMapper beerOrderMapper;
     private final BeerRepository beerRepository;
     private final CustomerRepository customerRepository;
+    private final ApplicationEventPublisher publisher;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public Boolean deleteBeerOrderById(UUID beerOrderId) {
@@ -44,7 +48,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     }
 
     @Override
-    public BeerOrderDTO updateBeerOrderById(UUID beerOrderId, BeerOrderUpdateDTO beerOrderUpdateDTO) {
+    public BeerOrderDTO updateOrder(UUID beerOrderId, BeerOrderUpdateDTO beerOrderUpdateDTO) {
 
         val order = beerOrderRepository.findById(beerOrderId).orElseThrow(NotFoundException::new);
 
@@ -77,7 +81,15 @@ public class BeerOrderServiceImpl implements BeerOrderService {
             }
         }
 
-        return beerOrderMapper.beerOrderToBeerOrderDTO(beerOrderRepository.save(order));
+        BeerOrderDTO dto = beerOrderMapper.beerOrderToBeerOrderDTO(beerOrderRepository.save(order));
+
+        if(beerOrderUpdateDTO.getPaymentAmount() != null) {
+            applicationEventPublisher.publishEvent(OrderPlacedEvent.builder()
+                    .beerOrderDTO(dto)
+            );
+        }
+
+        return dto;
 
     }
 

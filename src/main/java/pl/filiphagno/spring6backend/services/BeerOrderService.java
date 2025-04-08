@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface BeerOrderService {
     Page<BeerOrderDTO> getBeerOrders(Integer pageNumber, Integer pageSize);
     Optional<BeerOrderDTO> getBeerOrderById(UUID beerOrderId);
-    BeerOrderDTO updateBeerOrderById(UUID beerOrderId, BeerOrderUpdateDTO beerOrderUpdateDTO);
+    BeerOrderDTO updateOrder(UUID beerOrderId, BeerOrderUpdateDTO beerOrderUpdateDTO);
     BeerOrder createBeerOrder(BeerOrderCreateDTO beerOrderCreateDTO);
 
     Boolean deleteBeerOrderById(UUID beerOrderId);

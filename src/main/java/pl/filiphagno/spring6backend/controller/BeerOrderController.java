@@ -47,7 +47,7 @@ public class BeerOrderController {
     @PutMapping(BEER_ORDER_ID)
     public ResponseEntity<BeerOrderDTO>  updateBeerOrderById(@PathVariable("beerOrderId") UUID beerOrderId,
                                             @RequestBody BeerOrderUpdateDTO beerOrderUpdateDTO) {
-        return ResponseEntity.ok(beerOrderService.updateBeerOrderById(beerOrderId, beerOrderUpdateDTO));
+        return ResponseEntity.ok(beerOrderService.updateOrder(beerOrderId, beerOrderUpdateDTO));
     }
 
     @DeleteMapping(BEER_ORDER_ID)
