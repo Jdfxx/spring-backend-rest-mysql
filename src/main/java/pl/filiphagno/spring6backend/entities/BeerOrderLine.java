@@ -16,12 +16,12 @@
  */
 package pl.filiphagno.spring6backend.entities;
 
+import guru.springframework.spring6restmvcapi.model.BeerOrderLineStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 import org.hibernate.annotations.*;
 import org.hibernate.type.SqlTypes;
-import pl.filiphagno.spring6backend.model.BeerOrderLineStatus;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -68,7 +68,8 @@ public class BeerOrderLine {
     private Integer orderQuantity = 1;
     private Integer quantityAllocated = 0;
 
-    @Column(columnDefinition = "smallint")
-    private BeerOrderLineStatus beerOrderLineStatus;
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private BeerOrderLineStatus beerOrderLineStatus = BeerOrderLineStatus.NEW;
 
 }
