@@ -66,6 +66,8 @@ public class DrinkSplitterRouter {
                     log.debug("Splitting SAISON Order");
                     sendIceColdBeer(beerOrderLine);
                     break;
+                default:
+                    sendColdBeer(beerOrderLine);
             }
         });
     }
